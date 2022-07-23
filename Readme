@@ -1,0 +1,46 @@
+下記を自分の進化計算アルゴリズムのプログラムと同じディレクトリに置く．
+	Simulator.class
+	testfunc.class
+	landscape.class
+	Example.java	// 解の評価値を求める方法のサンプル
+	input_data (ディレクトリ)
+
+
+コンパイル・実行
+> javac Example.java
+> java Example
+
+
+Simulatorクラスのevaluateメソッド
+	f = Simulator.evaluate(num, x);
+
+	num:  関数番号．0～22 の整数．
+		0番は教員が自作した動作テスト用．
+		1～22番がIEEE CEC2014のコンテスト関数．
+
+	x:  double型一次元配列．
+		評価したい遺伝子の値をx[1]～x[n]に入れておく．
+		nは次元数．n=10とする．// 30, 50, 100も可能だが10を優先．
+
+
+public static double distance (int fnum, double[] p)
+	fnum:  関数番号．0-22 の整数．
+	p:  最適解との距離を求めたい解の位置ベクトル．10次元のみ．
+	戻り値:  最適解とpとのユークリッド距離．
+
+
+public static double[] evaluate (int fnum, double[] p)
+	fnum:  関数番号．0-22 の整数．
+	p:  最適解までのランドスケープを求めたい解の位置ベクトル．10次元のみ．
+	戻り値:  1001箇所の評価値．
+		501個目の値 ＝pの評価値
+		1001個目の値＝最適解の評価値
+		501～1001＝pから最適解までのランドスケープ...(1)
+		1～501＝(1)と反対方向のランドスケープ
+
+
+saitekikai.csv
+	関数 0～22 番の10次元最適解
+	関数番号を fnum とすると　最適解の評価値は　100 * fnum
+		(例) 関数15の最適解の評価値 = 1500
+
